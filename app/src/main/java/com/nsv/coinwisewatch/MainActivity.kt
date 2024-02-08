@@ -1,4 +1,4 @@
-package com.example.coinwisewatch
+package com.nsv.coinwisewatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

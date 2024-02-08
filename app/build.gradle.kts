@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.coinwisewatch"
+    namespace = "com.nsv.coinwisewatch"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.coinwisewatch"
+        applicationId = "com.nsv.coinwisewatch"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
