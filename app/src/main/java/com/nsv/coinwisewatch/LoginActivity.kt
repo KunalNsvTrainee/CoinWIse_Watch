@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
             Typeface.BOLD
         )
         binding.textview6.setTypeface(
-            Typeface.createFromAsset(assets, "fonts/googlesansbold.ttf")
+            Typeface.createFromAsset(assets, "fonts/googlesansbold.ttf"),
             Typeface.BOLD
         )
         _SX_CornerRadius_card(binding.btnLogin, "#F47F3C", 12.0)
