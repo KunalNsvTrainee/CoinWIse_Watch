@@ -19,7 +19,7 @@ class Splash : AppCompatActivity() {
         binding.animationView.playAnimation()
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)
-            val intent = Intent(this@Splash, MainActivity::class.java)
+            val intent = Intent(this@Splash, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

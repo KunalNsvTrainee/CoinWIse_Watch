@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "402365866929",
+    "project_id": "coinwise-watch",
+    "storage_bucket": "coinwise-watch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402365866929:android:0223254859a0212be4d390",
+        "android_client_info": {
+          "package_name": "com.nsv.coinwisewatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkkpvsn2Gt8tvThNndVR17ULx8PesuHCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -61,11 +61,11 @@
                     android:id="@+id/imageview3"
                     android:layout_width="30dp"
                     android:layout_height="28dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_7_1"
+                    android:src="@drawable/icon_home"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/home"
@@ -91,7 +91,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_7_2"
+                    android:src="@drawable/icon_profile"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_profile"
@@ -117,7 +117,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_8"
+                    android:src="@drawable/icon_membership"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_membership"
@@ -143,7 +143,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_8_1"
+                    android:src="@drawable/icon_rateus"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_rateus"
@@ -169,7 +169,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_6"
+                    android:src="@drawable/icon_share"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_share"
@@ -195,7 +195,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_2"
+                    android:src="@drawable/icon_privacy"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_privacy"
@@ -221,7 +221,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_3"
+                    android:src="@drawable/icon_about"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_about"
@@ -247,7 +247,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_9"
+                    android:src="@drawable/icon_report"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_report"
@@ -273,7 +273,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/icon_8_2"
+                    android:src="@drawable/icon_howtouse"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_guide"
@@ -299,7 +299,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/exit_1"
+                    android:src="@drawable/icon_exit"
                     android:scaleType="fitCenter" />
                 <TextView
                     android:id="@+id/tv_exit"
