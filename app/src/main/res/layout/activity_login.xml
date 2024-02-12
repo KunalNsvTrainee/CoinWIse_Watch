@@ -8,15 +8,13 @@ android:layout_height="match_parent"
 android:orientation="vertical"
 tools:context=".LoginActivity">
 
-<ScrollView
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+
+
     <LinearLayout
         android:id="@+id/linear22"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/login_layout"
@@ -44,7 +42,7 @@ tools:context=".LoginActivity">
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"
-                android:background="#EEEEEE"
+                android:background="@drawable/edittext_corner"
                 android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -60,7 +58,8 @@ tools:context=".LoginActivity">
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"
-                android:background="#EEEEEE"
+                android:background="@drawable/edittext_corner"
+                android:inputType="textPassword"
                 android:gravity="center_vertical"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -76,7 +75,8 @@ tools:context=".LoginActivity">
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/edittext_corner"
+                android:backgroundTint="@color/colorPrimary"
                 android:padding="8dp"
                 android:text="LOGIN"
                 android:textColor="#FFFFFF"
@@ -102,20 +102,15 @@ tools:context=".LoginActivity">
                 android:textSize="14sp"
                 android:textColor="#616161" />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/signup_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
 
-            >
             <LinearLayout
-                android:id="@+id/linear2"
+                android:id="@+id/signup_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/textview6"
                     android:layout_width="wrap_content"
@@ -141,7 +136,7 @@ tools:context=".LoginActivity">
                         android:layout_marginRight="3dp"
                         android:layout_marginBottom="8dp"
                         android:padding="8dp"
-                        android:background="#EEEEEE"
+                        android:background="@drawable/edittext_corner"
                         android:gravity="center_vertical"
                         android:textSize="16sp"
                         android:textColor="#000000"
@@ -159,7 +154,7 @@ tools:context=".LoginActivity">
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="8dp"
                         android:padding="8dp"
-                        android:background="#EEEEEE"
+                        android:background="@drawable/edittext_corner"
                         android:gravity="center_vertical"
                         android:textSize="16sp"
                         android:textColor="#000000"
@@ -177,7 +172,7 @@ tools:context=".LoginActivity">
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:background="#EEEEEE"
+                    android:background="@drawable/edittext_corner"
                     android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:textColor="#000000"
@@ -192,7 +187,7 @@ tools:context=".LoginActivity">
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:background="#EEEEEE"
+                    android:background="@drawable/edittext_corner"
                     android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:inputType="number"
@@ -208,7 +203,8 @@ tools:context=".LoginActivity">
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:background="#EEEEEE"
+                    android:inputType="textPassword"
+                    android:background="@drawable/edittext_corner"
                     android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:textColor="#000000"
@@ -223,7 +219,7 @@ tools:context=".LoginActivity">
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:background="#EEEEEE"
+                    android:background="@drawable/edittext_corner"
                     android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:textColor="#000000"
@@ -239,8 +235,8 @@ tools:context=".LoginActivity">
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:background="@color/colorPrimary"
-                    android:text="SIGNUP"
+                    android:background="@drawable/edittext_corner"
+                    android:backgroundTint="@color/colorPrimary"                    android:text="SIGNUP"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF" />
@@ -253,7 +249,5 @@ tools:context=".LoginActivity">
                     android:textSize="14sp"
                     android:textColor="#616161" />
             </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
-</ScrollView>
 </LinearLayout>

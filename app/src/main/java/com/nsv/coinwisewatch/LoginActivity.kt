@@ -1,6 +1,8 @@
 package com.nsv.coinwisewatch
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -11,101 +13,259 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.nsv.coinwisewatch.databinding.ActivityLoginBinding
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
+import java.util.Objects
+import java.util.Random
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
+    private val _firebase = FirebaseDatabase.getInstance()
+    private val users = _firebase.getReference("users")
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding:ActivityLoginBinding
+    private val i = Intent()
 
-    private var sp: SharedPreferences? = null
 
     private var prog: ProgressDialog? = null
 
 
+
+    @SuppressLint("ShowToast", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-         initialization();
-        binding.tvOpenSigninPage.setOnClickListener(View.OnClickListener { v ->
+        binding.tvOpenSigninPage.setOnClickListener(View.OnClickListener {
             setLoginPage()
         })
-        binding.tvOpenSignupPage.setOnClickListener(View.OnClickListener { v->
+        binding.tvOpenSignupPage.setOnClickListener(View.OnClickListener {
             setLoginPage()
         })
-    }
 
-    private fun initialization() {
-        sp = getSharedPreferences("tme", MODE_PRIVATE)
-    }
+        auth = Firebase.auth
 
-    fun setLoginPage(){
-        if (binding.signupLayout.visibility == View.VISIBLE) {
-            binding.signupLayout.visibility = View.GONE
-            binding.loginLayout.visibility =View.VISIBLE
-        } else {
-            binding.signupLayout.visibility = View.VISIBLE
+
+        binding.btnLogin.setOnClickListener(View.OnClickListener {
+            if (binding.etEmail.text.toString().trim { it <= ' ' } == "") {
+                binding.etEmail.error = "Enter Email Address"
+            } else {
+                if (binding.etPassword.text.toString().trim { it <= ' ' } == "") {
+                    binding.etPassword.error = "Enter Password"
+                } else {
+                    auth?.signInWithEmailAndPassword(
+                        binding.etEmail.text.toString().trim { it <= ' ' },
+                        binding.etPassword.text.toString().trim { it <= ' ' })
+                        ?.addOnCompleteListener(this@LoginActivity
+                        ) { param1 ->
+                            val success = param1.isSuccessful
+                            if (success) {
+                                loadingdialog(false, "")
+                                if (Objects.requireNonNull<FirebaseUser>(auth.currentUser).isEmailVerified) {
+                                    i.setClass(applicationContext, MainActivity::class.java)
+                                    startActivity(i)
+                                    finish()
+                                } else {
+                                    binding.etPassword.setText("")
+                                    FirebaseAuth.getInstance().signOut()
+                                    val BottomsheetD = BottomSheetDialog(this@LoginActivity)
+                                    val BottomsheetV: View =
+                                        layoutInflater.inflate(R.layout.dialog2, null)
+                                    BottomsheetD.setContentView(BottomsheetV)
+                                    val yes = BottomsheetV.findViewById<View>(R.id.yes) as TextView
+                                    BottomsheetD.window!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                                        .setBackgroundResource(android.R.color.transparent)
+                                    BottomsheetD.setCancelable(true)
+                                    yes.setOnClickListener { BottomsheetD.dismiss() }
+                                    BottomsheetD.show()
+                                }
+                            }
+
+                        }
+                    loadingdialog(true, "Please wait...")
+                }
+            }
+        })
+
+        binding.tvForgot.setOnClickListener(View.OnClickListener {
+            if (binding.etEmail.text.toString().trim { it <= ' ' } == "") {
+                binding.etEmail.requestFocus()
+                binding.etEmail.setError("Enter Register Email Address")
+            } else {
+                auth?.sendPasswordResetEmail(binding.etEmail.text.toString().trim { it <= ' ' })
+                    ?.addOnCompleteListener { _param1 ->
+                        val success = _param1.isSuccessful
+                        if (success) {
+                            loadingdialog(false, "")
+                            val BottomsheetD = BottomSheetDialog(this@LoginActivity)
+                            val BottomsheetV: View = layoutInflater.inflate(R.layout.dialog3, null)
+                            BottomsheetD.setContentView(BottomsheetV)
+                            val yes = BottomsheetV.findViewById<View>(R.id.yes) as TextView
+                            BottomsheetD.window!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                                .setBackgroundResource(android.R.color.transparent)
+                            BottomsheetD.setCancelable(true)
+                            yes.setOnClickListener { BottomsheetD.dismiss() }
+                            BottomsheetD.show()
+                        } else {
+                            loadingdialog(false, "")
+                        }
+                    }
+
+                loadingdialog(true, "Please wait...")
+            }
+        })
+
+        binding.tvOpenSignupPage.setOnClickListener {
             binding.loginLayout.visibility = View.GONE
+            binding.signupLayout.visibility = View.VISIBLE
         }
+        binding.btnSignup.setOnClickListener(View.OnClickListener {
+            if (binding.etFirstName.text.toString().trim { it <= ' ' } == "") {
+                binding.etFirstName.error = "Enter First Name"
+            } else {
+                if (binding.etLastName.text.toString().trim { it <= ' ' } == "") {
+                    binding.etLastName.error = "Enter Last Name"
+                } else {
+                    if (binding.etSignUpEmail.text.toString().trim { it <= ' ' } == "") {
+                        binding.etSignUpEmail.error = "Enter Email Address"
+                    } else {
+                        if (binding.etphonenumber.text.toString().trim { it <= ' ' } == "" || binding.etphonenumber.text.toString().trim { it <= ' ' }.length != 10) {
+                            binding.etphonenumber.error = "Enter valid Phonenumber"
+                        } else {
+                        if (binding.etPasswordSignup.text.toString().trim { it <= ' ' } == "") {
+                            binding.etPasswordSignup.error = "Enter Password"
+                        } else {
+                            auth.createUserWithEmailAndPassword(
+                                binding.etSignUpEmail.text.toString(),
+                                binding.etPasswordSignup.text.toString()
+                            ).addOnCompleteListener(this@LoginActivity){task ->
+                                if(task.isSuccessful){
+                                        var usermap = HashMap<String, Any>()
+                                        usermap["firstname"] = binding.etFirstName.text.toString().trim { it <= ' ' }
+                                        usermap["lastname"] = binding.etLastName.text.toString().trim { it <= ' ' }
+                                        usermap["email"] = binding.etSignUpEmail.text.toString().trim { it <= ' ' }
+                                        usermap["phonenumber"] = binding.etphonenumber.text.toString().trim { it <= ' ' }
+                                        usermap["password"] = binding.etPasswordSignup.text.toString().trim { it <= ' ' }
+                                        usermap["referralcode"] =getRefferalCode()
+                                        usermap["account"] =getAccountNumber()
+                                        usermap["avatar"] = "null"
+                                        usermap["Free"] = "true"
+                                        usermap["Silver"] = "false"
+                                        usermap["Gold"] = "false"
+                                        usermap["Diamond"] = "false"
+                                        usermap["join"] = SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime())
+                                        usermap["money"] = "0"
+                                        usermap["balance"] = "0"
+                                        usermap["block"] = "false"
+                                        usermap["limit"] = "05"
+                                        usermap["click"] = "0"
+                                        Toast.makeText(this@LoginActivity, "FirebaseAuth.", Toast.LENGTH_SHORT).show()
+                                        usermap["uid"] = FirebaseAuth.getInstance().currentUser!!.uid
+                                        users.child(FirebaseAuth.getInstance().currentUser!!.uid).updateChildren(usermap)
+                                        usermap.clear()
+                                        loadingdialog(false, "")
+                                        auth.currentUser?.sendEmailVerification()
+                                            ?.addOnCompleteListener(OnCompleteListener<Void?> { })
+                                        binding.etEmail.setText(binding.etSignUpEmail.getText().toString().trim { it <= ' ' })
+                                        binding.etPassword.setText(binding.etPasswordSignup.getText().toString().trim { it <= ' ' })
+                                        val BottomsheetD = BottomSheetDialog(this@LoginActivity)
+                                        val BottomsheetV: View
+                                        BottomsheetV = layoutInflater.inflate(R.layout.dialog, null)
+                                        BottomsheetD.setContentView(BottomsheetV)
+                                        val yes = BottomsheetV.findViewById<View>(R.id.yes) as TextView
+                                        BottomsheetD.window!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                                            .setBackgroundResource(android.R.color.transparent)
+                                        BottomsheetD.setCancelable(true)
+                                        yes.setOnClickListener {
+                                            BottomsheetD.dismiss()
+                                            binding.loginLayout.visibility = View.VISIBLE
+                                            binding.signupLayout.visibility = View.GONE
+                                        }
+                                        BottomsheetD.show()
+                                    } else {
+                                        loadingdialog(false, "")
+                                    }
+
+
+                            }
+
+                                }
+                            loadingdialog(true, "Please wait...")
+                        }
+                    }
+                }
+            }
+        })
+        binding.tvOpenSigninPage.setOnClickListener(View.OnClickListener {
+            binding.loginLayout.visibility = View.VISIBLE
+            binding.signupLayout.visibility = View.GONE
+        })
+
     }
 
+
+    private fun getRefferalCode() : Any{
+    return   binding.etFirstName.text.toString().trim { it <= ' ' }
+          .substring(0, 1) + binding.etLastName.text.toString().trim { it <= ' ' }
+          .substring(0, 1).uppercase(
+              Locale.getDefault()
+          ) + (getRandom(
+          0, 99999
+      ).toLong()).toString()
+
+  }
+
+    private fun getAccountNumber() : Any{
+       return  (getRandom(0, 9).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString() + (getRandom(
+            0, 9
+        ).toLong()).toString()
+    }
     private fun initializeLogic() {
-        binding.scroll.isFillViewport = true
-        binding.scroll.isVerticalScrollBarEnabled = false
         binding.etFirstName.filters = arrayOf<InputFilter>(LengthFilter(8))
         binding.etLastName.filters = arrayOf<InputFilter>(LengthFilter(8))
         binding.signupLayout.visibility = View.GONE
-        binding.etRefferalCode.visibility = View.GONE
-        binding.textview2.setTypeface(
-            Typeface.createFromAsset(assets, "fonts/googlesansbold.ttf"),
-            Typeface.BOLD
-        )
-        binding.textview6.setTypeface(
-            Typeface.createFromAsset(assets, "fonts/googlesansbold.ttf"),
-            Typeface.BOLD
-        )
-        _SX_CornerRadius_card(binding.btnLogin, "#F47F3C", 12.0)
-        _SX_CornerRadius_card(binding.btnSignup, "#F47F3C", 12.0)
-        _SX_CornerRadius_card(binding.etEmail, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etPassword, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etFirstName, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etLastName, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etRefferalCode, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etPasswordSignup, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etSignUpEmail, "#FFFFFF", 12.0)
-        _SX_CornerRadius_card(binding.etphonenumber, "#FFFFFF", 12.0)
-    }
-    fun _rippleRoundStroke(view: View, focus: String?, pressed: String?, round: Double, stroke: Double, strokeclr: String) {
-        val GG = GradientDrawable()
-        GG.setColor(Color.parseColor(focus))
-        GG.cornerRadius = round.toFloat()
-        GG.setStroke(
-            stroke.toInt(),
-            Color.parseColor("#" + strokeclr.replace("#", ""))
-        )
-        val RE = RippleDrawable(
-            ColorStateList(
-                arrayOf(intArrayOf()),
-                intArrayOf(Color.parseColor("#FF757575"))
-            ), GG, null
-        )
-        view.background = RE
-        view.elevation = 5f
-    }
-    fun _getTime() {
-        sp?.edit()?.putString("time_", Calendar.getInstance().getTimeInMillis().toString())?.apply()
-    }
-    fun _SX_CornerRadius_card(_view: View, _color: String?, _value: Double) {
-        val gd = GradientDrawable()
-        gd.setColor(Color.parseColor(_color))
-        gd.cornerRadius = _value.toInt().toFloat()
-        _view.background = gd
-        _view.elevation = 5f
+
     }
 
-    fun _loadingdialog(_ifShow: Boolean, _title: String) {
+
+    fun loadingdialog(_ifShow: Boolean, _title: String) {
         if (_ifShow) {
             if (prog == null) {
                 prog = ProgressDialog(this)
@@ -118,6 +278,22 @@ class LoginActivity : AppCompatActivity() {
             prog!!.show()
         } else {
             prog?.dismiss()
+        }
+    }
+
+
+    fun getRandom(_min: Int, _max: Int): Int {
+        val random = Random()
+        return random.nextInt(_max - _min + 1) + _min
+    }
+
+    private fun setLoginPage(){
+        if (binding.signupLayout.visibility == View.VISIBLE) {
+            binding.signupLayout.visibility = View.GONE
+            binding.loginLayout.visibility =View.VISIBLE
+        } else {
+            binding.signupLayout.visibility = View.VISIBLE
+            binding.loginLayout.visibility = View.GONE
         }
     }
 }
