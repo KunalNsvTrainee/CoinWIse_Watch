@@ -14,10 +14,31 @@
         android:theme="@style/Theme.CoinWIseWatch"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".Activities.SupportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WithdrawActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.AdsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.DailyBonus"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

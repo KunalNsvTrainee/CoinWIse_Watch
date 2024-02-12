@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/_drawer"
+    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start">
@@ -33,7 +33,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
-                        android:id="@+id/imageview1"
+                        android:id="@+id/navdrawer_btn"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="8dp"
@@ -58,7 +58,7 @@
                             android:textColor="#000000" />
                     </LinearLayout>
                     <ImageView
-                        android:id="@+id/imageview2"
+                        android:id="@+id/noti_btn"
                         android:layout_width="30dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="8dp"
@@ -75,7 +75,7 @@
                     <LinearLayout
                         android:id="@+id/linear11"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <LinearLayout
                             android:id="@+id/linear12"
@@ -119,9 +119,9 @@
                                 android:id="@+id/daily_bonus"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:layout_marginRight="8dp"
+                                android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="10dp"
                                 android:background="#FFFFFF"
                                 android:gravity="center_horizontal|center_vertical"
@@ -130,7 +130,7 @@
                                     android:id="@+id/bkash"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/resource_6"
+                                    android:src="@drawable/dailybonus"
                                     android:scaleType="fitCenter" />
                                 <TextView
                                     android:id="@+id/textview6"
@@ -156,7 +156,7 @@
                                     android:id="@+id/nagad"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/resource_3"
+                                    android:src="@drawable/monetization"
                                     android:scaleType="fitCenter" />
                                 <TextView
                                     android:id="@+id/textview7"
@@ -182,14 +182,14 @@
                                     android:id="@+id/rocket"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/resource_2"
+                                    android:src="@drawable/wallet"
                                     android:scaleType="fitCenter" />
                                 <TextView
                                     android:id="@+id/textview8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="15dp"
-                                    android:text="Website Visit"
+                                    android:text="Wallet"
                                     android:textSize="14sp"
                                     android:textColor="#000000" />
                             </LinearLayout>
@@ -216,7 +216,7 @@
                                     android:id="@+id/imageview13"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/resource_5"
+                                    android:src="@drawable/history"
                                     android:scaleType="fitCenter" />
                                 <TextView
                                     android:id="@+id/textview15"
@@ -242,7 +242,7 @@
                                     android:id="@+id/imageview14"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
-                                    android:src="@drawable/resource_4"
+                                    android:src="@drawable/customerservice"
                                     android:scaleType="fitCenter" />
                                 <TextView
                                     android:id="@+id/textview16"
@@ -285,8 +285,10 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <LinearLayout android:id="@+id/_nav_view" android:layout_width="320dp" android:layout_height="match_parent" android:layout_gravity="start" android:background="#EEEEEE">
         <include layout="@layout/nav_drawer"/>
     </LinearLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -57,6 +57,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
-  //  implementation("com.google.android.gms:play-services-ads:22.6.0")
+    //implementation("com.google.android.gms:play-services-ads:22.6.0")
 
 }

@@ -1,12 +1,10 @@
-package com.nsv.coinwisewatch
+package com.nsv.coinwisewatch.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.nsv.coinwisewatch.MainActivity
 import com.nsv.coinwisewatch.databinding.ActivitySplashBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,31 +1,24 @@
-package com.nsv.coinwisewatch
+package com.nsv.coinwisewatch.Activities
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.view.View
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.nsv.coinwisewatch.MainActivity
+import com.nsv.coinwisewatch.R
 import com.nsv.coinwisewatch.databinding.ActivityLoginBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -35,8 +28,8 @@ import java.util.Random
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
-    private val _firebase = FirebaseDatabase.getInstance()
-    private val users = _firebase.getReference("users")
+    private val firebase = FirebaseDatabase.getInstance()
+    private val users = firebase.getReference("users")
     private lateinit var auth: FirebaseAuth
     private lateinit var binding:ActivityLoginBinding
     private val i = Intent()
@@ -108,8 +101,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.etEmail.setError("Enter Register Email Address")
             } else {
                 auth?.sendPasswordResetEmail(binding.etEmail.text.toString().trim { it <= ' ' })
-                    ?.addOnCompleteListener { _param1 ->
-                        val success = _param1.isSuccessful
+                    ?.addOnCompleteListener { param1 ->
+                        val success = param1.isSuccessful
                         if (success) {
                             loadingdialog(false, "")
                             val BottomsheetD = BottomSheetDialog(this@LoginActivity)
@@ -265,8 +258,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun loadingdialog(_ifShow: Boolean, _title: String) {
-        if (_ifShow) {
+    fun loadingdialog ( ifShow: Boolean, title: String) {
+        if  ( ifShow) {
             if (prog == null) {
                 prog = ProgressDialog(this)
                 prog!!.max = 100
@@ -274,7 +267,7 @@ class LoginActivity : AppCompatActivity() {
                 prog!!.setCancelable(false)
                 prog!!.setCanceledOnTouchOutside(false)
             }
-            prog!!.setMessage(_title)
+            prog!!.setMessage ( title)
             prog!!.show()
         } else {
             prog?.dismiss()
@@ -282,9 +275,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun getRandom(_min: Int, _max: Int): Int {
+    fun getRandom ( min: Int, max: Int): Int {
         val random = Random()
-        return random.nextInt(_max - _min + 1) + _min
+        return random.nextInt ( max - min + 1) + min
     }
 
     private fun setLoginPage(){
