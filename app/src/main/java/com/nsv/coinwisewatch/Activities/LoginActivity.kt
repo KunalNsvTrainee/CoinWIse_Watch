@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 if (binding.etPassword.text.toString().trim { it <= ' ' } == "") {
                     binding.etPassword.error = "Enter Password"
                 } else {
-                    auth?.signInWithEmailAndPassword(
+                    auth.signInWithEmailAndPassword(
                         binding.etEmail.text.toString().trim { it <= ' ' },
                         binding.etPassword.text.toString().trim { it <= ' ' })
                         ?.addOnCompleteListener(this@LoginActivity
@@ -100,8 +100,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.etEmail.requestFocus()
                 binding.etEmail.setError("Enter Register Email Address")
             } else {
-                auth?.sendPasswordResetEmail(binding.etEmail.text.toString().trim { it <= ' ' })
-                    ?.addOnCompleteListener { param1 ->
+                auth.sendPasswordResetEmail(binding.etEmail.text.toString().trim { it <= ' ' })
+                    .addOnCompleteListener { param1 ->
                         val success = param1.isSuccessful
                         if (success) {
                             loadingdialog(false, "")
