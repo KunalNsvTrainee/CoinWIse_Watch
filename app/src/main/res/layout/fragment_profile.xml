@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_weight="1"
+    tools:context=".ActivityFragments.NavFargments.ProfileFragment">
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imageview1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/icon_5"
+                    android:scaleType="fitCenter" />
+                <LinearLayout
+                    android:id="@+id/linear3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/textview1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile"
+                        android:textSize="20sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageview2"
+                    android:layout_width="30dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/moree"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_avatar"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleimageview1"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/adb"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#F47F3C"
+                    app:civ_circle_background_color="#FFFFFF"
+                    app:civ_border_overlay="true" />
+                <TextView
+                    android:id="@+id/textview16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Add profile picture"
+                    android:textSize="14sp"
+                    android:textColor="#B71C1C" />
+                <LinearLayout
+                    android:id="@+id/linear5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textview2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#000000" />
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shim_name"
+                        android:layout_width="200dp"
+                        android:layout_height="20dp"
+                        android:padding="8dp"
+                        android:orientation="horizontal" />
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shim_email"
+                        android:layout_width="200dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="8dp"
+                        android:orientation="horizontal" />
+                    <TextView
+                        android:id="@+id/textview3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textSize="14sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="#EEEEEE"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textview12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Choose Your Goal"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/imageview3"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/unlock"
+                    android:scaleType="fitCenter" />
+                <LinearLayout
+                    android:id="@+id/linear11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Be special member, And earn more"
+                        android:textSize="14sp"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textview15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Upgrade Now!"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Membership:"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/textview11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_m"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Referral Code:"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/textview9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_rc"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Join Date:"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/textview18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_join"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Total Coin:"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/textview20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_bal"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Total Money:"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/textview22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shim_mon"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:padding="8dp"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear18"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:orientation="horizontal"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:id="@+id/ad_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="horizontal">
+                <!--    <com.google.android.gms.ads.AdView
+                        android:id="@+id/adview1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:adSize="MEDIUM_RECTANGLE"
+                        app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                -->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
