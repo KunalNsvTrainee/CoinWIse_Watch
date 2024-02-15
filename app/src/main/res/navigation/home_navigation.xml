@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_homeFragment_self"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
@@ -49,6 +52,18 @@
         <action
             android:id="@+id/action_quizFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -62,8 +77,17 @@
             android:id="@+id/action_historyFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_historyFragment_to_homeFragment2"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_historyFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/withdrawFragment"
@@ -76,6 +100,18 @@
         <action
             android:id="@+id/action_withdrawFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_withdrawFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_withdrawFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_withdrawFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_withdrawFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
@@ -89,8 +125,17 @@
             android:id="@+id/action_supportFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_supportFragment_to_homeFragment2"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_supportFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_supportFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_supportFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_supportFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -104,8 +149,17 @@
             android:id="@+id/action_aboutUsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_aboutUsFragment_to_homeFragment2"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_aboutUsFragment_self"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/membershipFragment"
@@ -118,6 +172,18 @@
         <action
             android:id="@+id/action_membershipFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_self"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacypolicyFragment"
@@ -130,6 +196,18 @@
         <action
             android:id="@+id/action_privacypolicyFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_privacypolicyFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_privacypolicyFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_privacypolicyFragment_self"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_privacypolicyFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
 
     </fragment>
     <fragment
@@ -142,6 +220,42 @@
             app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.nsv.coinwisewatch.ActivityFragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_self"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_privacypolicyFragment"
+            app:destination="@id/privacypolicyFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

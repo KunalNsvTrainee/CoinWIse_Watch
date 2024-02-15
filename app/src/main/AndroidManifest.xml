@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CoinWIseWatch"
         tools:targetApi="31">
-        <activity
-            android:name=".Activities.NotificationActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

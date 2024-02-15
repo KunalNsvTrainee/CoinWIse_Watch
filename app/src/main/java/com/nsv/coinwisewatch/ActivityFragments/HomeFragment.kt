@@ -56,13 +56,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var limit = 0.0
     private var click = 0.0
-    private var username = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
@@ -118,12 +117,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-        binding.hist.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
-        })
-        binding.others.setOnClickListener(View.OnClickListener {
-           findNavController().navigate(R.id.action_homeFragment_to_withdrawFragment)
-        })
+        binding.hist.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_historyFragment) }
+        binding.withdraw.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_withdrawFragment) }
+        binding.quickQuiz.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_quizFragment) }
+        binding.support.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_supportFragment)}
 
         users.addChildEventListener(object : ChildEventListener {
             @SuppressLint("SetTextI18n")

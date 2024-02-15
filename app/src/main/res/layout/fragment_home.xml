@@ -187,7 +187,7 @@
                         android:textColor="#000000" />
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/others"
+                    android:id="@+id/withdraw"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:layout_marginStart="8dp"
