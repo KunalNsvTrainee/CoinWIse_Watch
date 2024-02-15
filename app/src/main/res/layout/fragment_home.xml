@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ActivityFragments.HomeFragment">
 
         <LinearLayout
@@ -10,21 +11,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/linear12"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/textview4"
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                app:cardElevation="10dp">
+                <RelativeLayout
+                    android:id="@+id/appnametitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:textSize="12sp"
-                    android:textColor="#607D8B" />
-            </LinearLayout>
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/linear13"
                 android:layout_width="match_parent"

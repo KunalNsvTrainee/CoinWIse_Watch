@@ -65,6 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
+    @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.dailyBonus.setOnClickListener { v ->
@@ -87,7 +88,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 map.clear()
                 congratulation("+10 points")
             } else {
-                if (time_X != "") {
                     last_Claimed = time_X.toDouble()
                     now_time = calendar.timeInMillis - last_Claimed
                     if (now_time / (60 * 60000) > 24 || now_time / (60 * 60000) == 24.0) {
@@ -114,13 +114,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         Toast.makeText(context, "Wait 24 hours", Toast.LENGTH_SHORT)
                             .show()
                     }
-                }
             }
         }
-        binding.hist.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_historyFragment) }
-        binding.withdraw.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_withdrawFragment) }
-        binding.quickQuiz.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_quizFragment) }
-        binding.support.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_supportFragment)}
+       binding.hist.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_historyFragment) }
+       binding.withdraw.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_withdrawFragment) }
+       binding.quickQuiz.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_quizFragment) }
+       binding.support.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_supportFragment)}
 
         users.addChildEventListener(object : ChildEventListener {
             @SuppressLint("SetTextI18n")

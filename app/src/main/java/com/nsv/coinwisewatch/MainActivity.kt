@@ -18,8 +18,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -39,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     private val users: DatabaseReference = firebase.getReference("users")
 
     private var prog: ProgressDialog? = null
-    private lateinit var navview :LinearLayout
 
 
 
@@ -49,10 +53,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FirebaseApp.initializeApp(this)
 
+        val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        binding.bottomNavBar.setupWithNavController(navHostFragment.navController)
 
         initializing()
-        FirebaseApp.initializeApp(this)
+
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -83,104 +90,10 @@ class MainActivity : AppCompatActivity() {
         )
         binding.drawer.addDrawerListener(toggle)
         toggle.syncState()
-        navview =findViewById<View>(R.id._nav_view) as LinearLayout
 
 
-        users.addChildEventListener(object : ChildEventListener {
-            @SuppressLint("SetTextI18n")
-            override fun onChildAdded( param1: DataSnapshot,  param2: String?) {
-                val  ind: GenericTypeIndicator<java.util.HashMap<String?, Any?>?> =
-                    object : GenericTypeIndicator<java.util.HashMap<String?, Any?>?>() {}
-                val  childKey =  param1.key
-                val  childValue =  param1.getValue( ind)!!
-                if ( childKey == FirebaseAuth.getInstance().currentUser!!.uid) {
-                    loadingdialog(false, "")
-                    if ( childValue["avatar"].toString() == "null") {
-                        navview.findViewById<View>(R.id.linear3).visibility =
-                            View.VISIBLE
-                        navview.findViewById<View>(R.id.imageview_avatar).visibility = View.GONE
-                    } else {
-                        navview.findViewById<View>(R.id.linear3).visibility = View.GONE
-                        navview.findViewById<View>(R.id.imageview_avatar).visibility = View.VISIBLE
-                        Glide.with(applicationContext)
-                            .load(Uri.parse( childValue["avatar"].toString()))
-                            .into(navview.findViewById<View>(R.id.imageview_avatar) as ImageView)
-                    }
-
-                    if ( childValue.containsKey("firstname") &&  childValue.containsKey("lastname")) {
-                        navview.findViewById<TextView>(R.id.tvimage).apply {
-                            text =  childValue["firstname"].toString().trim { it <= ' ' }
-                                .substring(0, 1) +  childValue["lastname"].toString()
-                                .trim { it <= ' ' }
-                                .substring(0, 1).uppercase(Locale.getDefault())
-                        }
-                    }
-                }
-            }
-            @SuppressLint("SetTextI18n")
-            override fun onChildChanged( param1: DataSnapshot,  param2: String?) {
-                val  ind: GenericTypeIndicator<java.util.HashMap<String?, Any?>?> =
-                    object : GenericTypeIndicator<java.util.HashMap<String?, Any?>?>() {}
-                val  childKey =  param1.key
-                val  childValue =  param1.getValue( ind)!!
-                if ( childKey == FirebaseAuth.getInstance().currentUser!!.uid) {
-                    loadingdialog(false, "")
-                    if ( childValue["avatar"].toString() == "null") {
-                        navview.findViewById<View>(R.id.linear3).visibility = View.VISIBLE
-                        navview.findViewById<View>(R.id.imageview_avatar).visibility = View.GONE
-                    } else {
-                        navview.findViewById<View>(R.id.linear3).visibility = View.GONE
-                        navview.findViewById<View>(R.id.imageview_avatar).visibility = View.VISIBLE
-                        Glide.with(applicationContext)
-                            .load(Uri.parse( childValue["avatar"].toString()))
-                            .into(navview.findViewById<View>(R.id.imageview_avatar) as ImageView)
-                    }
-
-                    if ( childValue.containsKey("firstname") &&  childValue.containsKey("lastname")) {
-                        navview.findViewById<TextView>(R.id.tvimage).apply {
-                            text =  childValue["firstname"].toString().trim { it <= ' ' }
-                                .substring(0, 1) +  childValue["lastname"].toString()
-                                .trim { it <= ' ' }
-                                .substring(0, 1).uppercase(Locale.getDefault())
-                        }
-                    }
-                }
-            }
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
-            }
-            override fun onChildMoved( param1: DataSnapshot,  param2: String?) {}
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        binding.navdrawerBtn.setOnClickListener {
+      /*  binding.navdrawerBtn.setOnClickListener {
             binding.drawer.openDrawer(GravityCompat.START)
-        }
-
-        binding.notiBtn.setOnClickListener {
-            if(isCurrentDestinationSame("fragment_home")){
-                navigateToDestination(R.id.action_homeFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_membership")){
-                navigateToDestination(R.id.action_membershipFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_privacypolicy")){
-                navigateToDestination(R.id.action_privacypolicyFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_about_us")){
-                navigateToDestination(R.id.action_aboutUsFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_history")){
-                navigateToDestination(R.id.action_historyFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_support")){
-                navigateToDestination(R.id.action_supportFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_withdraw")){
-                navigateToDestination(R.id.action_withdrawFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_quiz")){
-                navigateToDestination(R.id.action_quizFragment_to_notificationFragment)
-            }else if(isCurrentDestinationSame("fragment_profile")) {
-                navigateToDestination(R.id.action_profileFragment_to_notificationFragment)
-            } else{
-                navigateToDestination(R.id.action_notificationFragment_self)
-            }
         }
 
         navview.findViewById<View>(R.id.exit).setOnClickListener {
@@ -234,133 +147,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
 
-        navview.findViewById<View>(R.id.home).setOnClickListener {
-            if (isCurrentDestinationSame("fragment_profile")) {
-                navigateToDestination(R.id.action_profileFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_membership")) {
-                navigateToDestination(R.id.action_membershipFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_privacypolicy")) {
-                navigateToDestination(R.id.action_privacypolicyFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_about_us")) {
-                navigateToDestination(R.id.action_aboutUsFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_history")) {
-                navigateToDestination(R.id.action_historyFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_support")) {
-                navigateToDestination(R.id.action_supportFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_withdraw")) {
-                navigateToDestination(R.id.action_withdrawFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_quiz")) {
-                navigateToDestination(R.id.action_quizFragment_to_homeFragment)
-            } else if (isCurrentDestinationSame("fragment_notification")) {
-                navigateToDestination(R.id.action_notificationFragment_to_homeFragment)
-            } else {
-                navigateToDestination(R.id.action_homeFragment_self)
-            }
-            binding.drawer.closeDrawer(GravityCompat.START)
 
-        }
-
-        navview.findViewById<View>(R.id.profile).setOnClickListener {
-
-            if (isCurrentDestinationSame("fragment_home")) {
-                navigateToDestination(R.id.action_homeFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_membership")) {
-                navigateToDestination(R.id.action_membershipFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_privacypolicy")) {
-                navigateToDestination(R.id.action_privacypolicyFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_about_us")) {
-                navigateToDestination(R.id.action_aboutUsFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_history")) {
-                navigateToDestination(R.id.action_historyFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_support")) {
-                navigateToDestination(R.id.action_supportFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_withdraw")) {
-                navigateToDestination(R.id.action_withdrawFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_quiz")) {
-                navigateToDestination(R.id.action_quizFragment_to_profileFragment)
-            } else if (isCurrentDestinationSame("fragment_notification")) {
-                navigateToDestination(R.id.action_notificationFragment_to_profileFragment)
-            } else {
-                navigateToDestination(R.id.action_profileFragment_self)
-            }
-            binding.drawer.closeDrawer(GravityCompat.START)
-        }
-
-        navview.findViewById<View>(R.id.about).setOnClickListener {
-            if (isCurrentDestinationSame("fragment_home")) {
-                navigateToDestination(R.id.action_homeFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_membership")) {
-                navigateToDestination(R.id.action_membershipFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_privacypolicy")) {
-                navigateToDestination(R.id.action_privacypolicyFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_profile")) {
-                navigateToDestination(R.id.action_profileFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_history")) {
-                navigateToDestination(R.id.action_historyFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_support")) {
-                navigateToDestination(R.id.action_supportFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_withdraw")) {
-                navigateToDestination(R.id.action_withdrawFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_quiz")) {
-                navigateToDestination(R.id.action_quizFragment_to_aboutUsFragment)
-            } else if (isCurrentDestinationSame("fragment_notification")) {
-                navigateToDestination(R.id.action_notificationFragment_to_aboutUsFragment)
-            } else {
-                navigateToDestination(R.id.action_aboutUsFragment_self)
-            }
-            binding.drawer.closeDrawer(GravityCompat.START)
-        }
-
-        navview.findViewById<View>(R.id.privacy).setOnClickListener {
-            if (isCurrentDestinationSame("fragment_home")) {
-                navigateToDestination(R.id.action_homeFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_membership")) {
-                navigateToDestination(R.id.action_membershipFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_about_us")) {
-                navigateToDestination(R.id.action_aboutUsFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_profile")) {
-                navigateToDestination(R.id.action_profileFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_history")) {
-                navigateToDestination(R.id.action_historyFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_support")) {
-                navigateToDestination(R.id.action_supportFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_withdraw")) {
-                navigateToDestination(R.id.action_withdrawFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_quiz")) {
-                navigateToDestination(R.id.action_quizFragment_to_privacypolicyFragment)
-            } else if (isCurrentDestinationSame("fragment_notification")) {
-                navigateToDestination(R.id.action_notificationFragment_to_privacypolicyFragment)
-            } else {
-                navigateToDestination(R.id.action_privacypolicyFragment_self)
-            }
-            binding.drawer.closeDrawer(GravityCompat.START)
-        }
-
-        navview.findViewById<View>(R.id.membership).setOnClickListener {
-            if (isCurrentDestinationSame("fragment_home")) {
-                navigateToDestination(R.id.action_homeFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_about_us")) {
-                navigateToDestination(R.id.action_aboutUsFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_privacypolicy")) {
-                navigateToDestination(R.id.action_privacypolicyFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_profile")) {
-                navigateToDestination(R.id.action_profileFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_history")) {
-                navigateToDestination(R.id.action_historyFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_support")) {
-                navigateToDestination(R.id.action_supportFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_withdraw")) {
-                navigateToDestination(R.id.action_withdrawFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_quiz")) {
-                navigateToDestination(R.id.action_quizFragment_to_membershipFragment)
-            } else if (isCurrentDestinationSame("fragment_notification")) {
-                navigateToDestination(R.id.action_notificationFragment_to_membershipFragment)
-            } else {
-                navigateToDestination(R.id.action_membershipFragment_self)
-            }
-            binding.drawer.closeDrawer(GravityCompat.START)
-        }
-
+       */
 
     }
 
@@ -396,33 +184,9 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
-
-
-
-    fun loadingdialog(ifShow: Boolean,title: String?) {
-        if (ifShow) {
-            if (prog == null) {
-                prog = ProgressDialog(this)
-                prog!!.max = 100
-                prog!!.isIndeterminate = true
-                prog!!.setCancelable(false)
-                prog!!.setCanceledOnTouchOutside(false)
-            }
-            prog!!.setMessage(title)
-            prog!!.show()
-        } else {
-            if (prog != null) {
-                prog!!.dismiss()
-            }
-        }
-    }
-
     private fun isCurrentDestinationSame(tag :String):Boolean{
         return findNavController(R.id.nav_host_fragment).currentDestination?.label == tag
     }
-    private fun navigateToDestination(view: Int){
-        return findNavController(R.id.nav_host_fragment).navigate(view)
-    }
+
 
 }
