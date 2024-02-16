@@ -3,10 +3,7 @@ package com.nsv.coinwisewatch
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.ActivityNotFoundException
-import android.content.Intent
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -21,20 +18,11 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.GenericTypeIndicator
 import com.nsv.coinwisewatch.databinding.ActivityMainBinding
-import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private val users: DatabaseReference = firebase.getReference("users")
 
     private var prog: ProgressDialog? = null
+    private lateinit var navController:NavController
 
 
 
@@ -56,7 +45,8 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        binding.bottomNavBar.setupWithNavController(navHostFragment.navController)
+        navController = navHostFragment.navController
+        binding.bottomNavBar.setupWithNavController(navController)
 
         initializing()
 
@@ -188,5 +178,11 @@ class MainActivity : AppCompatActivity() {
         return findNavController(R.id.nav_host_fragment).currentDestination?.label == tag
     }
 
+    fun getNavController(): NavController {
+        return navController
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }

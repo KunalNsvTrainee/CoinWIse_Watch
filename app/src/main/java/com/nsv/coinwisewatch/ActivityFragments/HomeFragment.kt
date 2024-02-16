@@ -1,14 +1,14 @@
 package com.nsv.coinwisewatch.ActivityFragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +17,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -32,7 +30,6 @@ import com.nsv.coinwisewatch.R
 import com.nsv.coinwisewatch.databinding.FragmentHomeBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
@@ -49,9 +46,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var prog: ProgressDialog? = null
 
-
     private val history: DatabaseReference = firebase.getReference("history")
     private val claimed_time: DatabaseReference = firebase.getReference("claimed_time")
+    private val control: DatabaseReference = firebase.getReference("control")
 
 
     private var limit = 0.0
@@ -68,6 +65,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         binding.dailyBonus.setOnClickListener { v ->
             if (time_X == "") {
                 map["balance"] = (balance.toDouble() + 10).toLong().toString()
@@ -218,6 +218,201 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             }
             override fun onCancelled( param1: DatabaseError) {
+            }
+        })
+
+        /*	_sponsor_child_listener = new ChildEventListener() {
+			@Override
+			public void onChildAdded(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				if (_childValue.get("type").toString().equals("slider1")) {
+					if (_childValue.containsKey("image")) {
+						slider1 = _childValue.get("image").toString();
+					}
+					imageview3.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View _view) {
+							if (_childValue.containsKey("link1")) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link1").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						}
+					});
+				}
+				if (_childValue.get("type").toString().equals("slider2")) {
+					if (_childValue.containsKey("image")) {
+						slider2 = _childValue.get("image").toString();
+					}
+					imageview3.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View _view) {
+							if (_childValue.containsKey("link2")) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link2").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						}
+					});
+				}
+				if (_childValue.get("type").toString().equals("slider3")) {
+					if (_childValue.containsKey("image")) {
+						slider3 = _childValue.get("image").toString();
+					}
+					if (_childValue.containsKey("link3")) {
+						imageview3.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View _view) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link3").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						});
+					}
+				}
+			}
+
+			@Override
+			public void onChildChanged(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				if (_childValue.get("type").toString().equals("slider1")) {
+					if (_childValue.containsKey("image")) {
+						slider3 = _childValue.get("image").toString();
+					}
+					imageview3.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View _view) {
+							if (_childValue.containsKey("link1")) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link1").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						}
+					});
+				}
+				if (_childValue.get("type").toString().equals("slider2")) {
+					if (_childValue.containsKey("image")) {
+						slider3 = _childValue.get("image").toString();
+					}
+					imageview3.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View _view) {
+							if (_childValue.containsKey("link2")) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link2").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						}
+					});
+				}
+				if (_childValue.get("type").toString().equals("slider3")) {
+					if (_childValue.containsKey("image")) {
+						slider3 = _childValue.get("image").toString();
+					}
+					if (_childValue.containsKey("link3")) {
+						imageview3.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View _view) {
+								go.putExtra("title", "");
+								go.putExtra("link", _childValue.get("link3").toString());
+								go.setClass(getApplicationContext(), WebActivity.class);
+								startActivity(go);
+							}
+						});
+					}
+				}
+			}
+
+			@Override
+			public void onChildMoved(DataSnapshot _param1, String _param2) {
+
+			}
+
+			@Override
+			public void onChildRemoved(DataSnapshot _param1) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+
+			}
+
+			@Override
+			public void onCancelled(DatabaseError _param1) {
+				final int _errorCode = _param1.getCode();
+				final String _errorMessage = _param1.getMessage();
+
+			}
+		};*/
+        //	sponsor.addChildEventListener(_sponsor_child_listener);
+        control.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(_param1: DataSnapshot, _param2: String?) {
+                val _ind: GenericTypeIndicator<java.util.HashMap<String?, Any?>?> =
+                    object : GenericTypeIndicator<java.util.HashMap<String?, Any?>?>() {}
+                val _childValue = _param1.getValue(_ind)!!!!
+                if (_childValue["control"].toString() == "disable") {
+                    val dialog2 = AlertDialog.Builder(context).create()
+                    val inflate: View = layoutInflater.inflate(R.layout.custom, null)
+                    dialog2.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog2.setView(inflate)
+                    val t1 = inflate.findViewById<View>(R.id.t1) as TextView
+                    val t2 = inflate.findViewById<View>(R.id.t2) as TextView
+                    val b2 = inflate.findViewById<View>(R.id.b2) as LinearLayout
+                    val i1 = inflate.findViewById<View>(R.id.i1) as ImageView
+                    val bg = inflate.findViewById<View>(R.id.bg) as LinearLayout
+                    val t3 = inflate.findViewById<View>(R.id.t3) as TextView
+                    t2.setTextColor(-0xc0ae4b)
+                    i1.setImageResource(R.drawable.img)
+                    t1.text = "Temporary Closed"
+                    t2.text = "But, Will Be Back Soon"
+                    t3.text = "Exit"
+                    b2.setOnClickListener { }
+                    dialog2.setCancelable(false)
+                    dialog2.show()
+                }
+            }
+
+            override fun onChildChanged(_param1: DataSnapshot, _param2: String?) {
+                val _ind: GenericTypeIndicator<java.util.HashMap<String?, Any?>?> =
+                    object : GenericTypeIndicator<java.util.HashMap<String?, Any?>?>() {}
+                val _childValue = _param1.getValue(_ind)!!
+                if (_childValue["control"].toString() == "disable") {
+                    val dialog2 = AlertDialog.Builder(context).create()
+                    val inflate: View = layoutInflater.inflate(R.layout.custom, null)
+                    dialog2.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog2.setView(inflate)
+                    val t1 = inflate.findViewById<View>(R.id.t1) as TextView
+                    val t2 = inflate.findViewById<View>(R.id.t2) as TextView
+                    val b2 = inflate.findViewById<View>(R.id.b2) as LinearLayout
+                    val i1 = inflate.findViewById<View>(R.id.i1) as ImageView
+                    val bg = inflate.findViewById<View>(R.id.bg) as LinearLayout
+                    val t3 = inflate.findViewById<View>(R.id.t3) as TextView
+                    t2.setTextColor(-0xc0ae4b)
+                    i1.setImageResource(R.drawable.img)
+                    t1.text = "Temporary Closed"
+                    t2.text = "But, Will Be Back Soon"
+                    t3.text = "Exit"
+                    b2.setOnClickListener { }
+                    dialog2.setCancelable(false)
+                    dialog2.show()
+                }
+            }
+
+            override fun onChildMoved(_param1: DataSnapshot, _param2: String?) {}
+            override fun onChildRemoved(_param1: DataSnapshot) {
+
+            }
+
+            override fun onCancelled(_param1: DatabaseError) {
+
             }
         })
 

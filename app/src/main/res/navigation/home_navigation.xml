@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.nsv.coinwisewatch.ActivityFragments.NavFargments.AboutUsFragment"
+        android:name="com.nsv.coinwisewatch.ActivityFragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" >
         <action
@@ -73,12 +73,12 @@
     </fragment>
     <fragment
         android:id="@+id/membershipFragment"
-        android:name="com.nsv.coinwisewatch.ActivityFragments.NavFargments.MembershipFragment"
+        android:name="com.nsv.coinwisewatch.ActivityFragments.MembershipFragment"
         android:label="fragment_membership"
         tools:layout="@layout/fragment_membership" />
     <fragment
         android:id="@+id/privacypolicyFragment"
-        android:name="com.nsv.coinwisewatch.ActivityFragments.NavFargments.PrivacypolicyFragment"
+        android:name="com.nsv.coinwisewatch.ActivityFragments.PrivacypolicyFragment"
         android:label="fragment_privacypolicy"
         tools:layout="@layout/fragment_privacypolicy" >
         <action
@@ -87,9 +87,16 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.nsv.coinwisewatch.ActivityFragments.NavFargments.ProfileFragment"
+        android:name="com.nsv.coinwisewatch.ActivityFragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_withdrawFragment"
+            app:destination="@id/withdrawFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.nsv.coinwisewatch.ActivityFragments.NotificationFragment"

@@ -1,4 +1,4 @@
-package com.nsv.coinwisewatch.ActivityFragments.NavFargments
+package com.nsv.coinwisewatch.ActivityFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

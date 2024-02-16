@@ -3,9 +3,8 @@ package com.nsv.coinwisewatch.Activities
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.InputFilter
-import android.text.InputFilter.LengthFilter
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -36,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private var prog: ProgressDialog? = null
+    private lateinit var sftime: SharedPreferences
 
 
 
@@ -44,6 +44,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sftime = getSharedPreferences("SFtime", MODE_PRIVATE)
+
         binding.tvOpenSigninPage.setOnClickListener(View.OnClickListener {
             setLoginPage()
         })
@@ -70,6 +73,9 @@ class LoginActivity : AppCompatActivity() {
                             if (success) {
                                 loadingdialog(false, "")
                                 if (Objects.requireNonNull<FirebaseUser>(auth.currentUser).isEmailVerified) {
+                                    sftime.edit().putString("time", Calendar.getInstance().timeInMillis.toString())
+                                        .apply()
+
                                     i.setClass(applicationContext, MainActivity::class.java)
                                     startActivity(i)
                                     finish()
@@ -249,12 +255,6 @@ class LoginActivity : AppCompatActivity() {
         ).toLong()).toString() + (getRandom(
             0, 9
         ).toLong()).toString()
-    }
-    private fun initializeLogic() {
-        binding.etFirstName.filters = arrayOf<InputFilter>(LengthFilter(8))
-        binding.etLastName.filters = arrayOf<InputFilter>(LengthFilter(8))
-        binding.signupLayout.visibility = View.GONE
-
     }
 
 

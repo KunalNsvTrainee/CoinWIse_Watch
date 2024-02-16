@@ -8,4 +8,5 @@
     <color name="colorControlHighlight">#008DCD</color>
     <color name="colorControlNormal">#F47F3C</color>
     <color name="gradcolor">#01141E</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
