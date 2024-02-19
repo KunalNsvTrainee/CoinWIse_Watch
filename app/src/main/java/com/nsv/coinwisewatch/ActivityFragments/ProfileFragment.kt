@@ -57,26 +57,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
         FirebaseApp.initializeApp(requireContext())
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_DENIED
-            || ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_DENIED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                1000
-            )
-        } else {
+
             initializeLogic()
-        }
 
 
         /*  FirebaseAuth.getInstance().uid?.let {
@@ -93,7 +75,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
          */
 
-        binding.imageview1.setOnClickListener { findNavController().popBackStack() }
 
         binding.imageview2.setOnClickListener {
             val bottomSheetDialog = BottomSheetDialog(requireContext())
@@ -118,7 +99,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.textview16.setOnClickListener {
 
-            /*   val intent = ImagePicker.with(requireActivity())
+            /* val intent = ImagePicker.with(requireActivity())
                     .bothCameraGallery()
                     .cropSquare()
                     .maxResultSize(1080,1080)
@@ -157,7 +138,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             }
                         }
                     }
-                    timer.schedule(shimtimer, 1000.toLong())
+                   timer.schedule(shimtimer, 1000.toLong())
                     if (_childValue.containsKey("email")) {
                         binding.textview3.text = _childValue["email"].toString()
                         shimtimer = object : TimerTask() {
@@ -516,7 +497,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         //adview1.loadAd(new AdRequest.Builder().addTestDevice("708001022B2AEFB4CA5DB3785F35FD14")
         //.build());
         ui()
-        animation()
 
         binding.shimAvatar.visibility = View.VISIBLE
         binding.linear10.visibility = View.GONE
@@ -560,26 +540,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
 
-    private fun animation() {
-        lateinit var anim: ObjectAnimator
-
-        val t: TimerTask = object : TimerTask() {
-            override fun run() {
-                activity?.runOnUiThread {
-                    anim.target = binding.linear12
-                    anim.setPropertyName("translationX")
-                    anim.setFloatValues(5.toFloat())
-                    anim.setFloatValues(0.toFloat(), 5.toFloat())
-                    anim.setDuration(500.toLong())
-                    anim.repeatMode = ValueAnimator.REVERSE
-                    anim.repeatCount = 1
-                    anim.start()
-                }
-            }
-        }
-
-        timer.scheduleAtFixedRate(t, 2000.toLong(), 500.toLong())
-    }
 
 
     private fun shadow(_sadw: Double, _cru: Double, _wc: String?, _widgets: View) {
